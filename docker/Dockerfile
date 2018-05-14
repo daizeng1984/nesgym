@@ -47,6 +47,7 @@ ENV PATH=$PATH:/usr/games
 EXPOSE 5900
 
 COPY "./docker_start.sh" "/opt/docker_start.sh"
+RUN chmod +x "/opt/docker_start.sh"
 
 
 CMD ["/opt/docker_start.sh"]
