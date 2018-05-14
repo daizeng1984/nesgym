@@ -1,14 +1,7 @@
-# docker run -it \
-#    --net host \ # may as well YOLO
-#    --cpuset-cpus 0 \ # control the cpu
-#    --memory 512mb \ # max memory it can use
-#    -v /tmp/.X11-unix:/tmp/.X11-unix \ # mount the X11 socket
-#    -e DISPLAY=unix$DISPLAY \ # pass the display
-#    -v $HOME/Downloads:/root/Downloads \ # optional, but nice
-#    -v $HOME/.config/google-chrome/:/data \ # if you want to save state
-#    --device /dev/snd \ # so we have sound
-#    --name chrome \
-#    jess/chrome
+# Mostly grabbed from this repo https://github.com/paulsuda/jupyter-gym-vnc
+# build: sudo docker build -t test:nesgym .
+# run: sudo nvidia-docker run -it -p 5900:5900 -v ~/Workspace/:/root/Workspace test:nesgym
+#      then run your python app
 FROM ufoym/deepo
 
 RUN apt-get update
@@ -47,9 +40,8 @@ ENV PATH=$PATH:/usr/games
 EXPOSE 5900
 
 COPY "./docker_start.sh" "/opt/docker_start.sh"
-RUN chmod +x "/opt/docker_start.sh"
+COPY "./xsession_start.sh" "/opt/xsession_start.sh"
 
+RUN chmod +x "/opt/docker_start.sh" "/opt/xsession_start.sh"
 
 CMD ["/opt/docker_start.sh"]
-
-

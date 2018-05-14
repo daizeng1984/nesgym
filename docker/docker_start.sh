@@ -11,4 +11,4 @@ mkdir ~/.vnc
 x11vnc -storepasswd "$SET_VNC_PASS" ~/.vnc/passwd
 
 # Virtual X server
-/usr/bin/xvfb-run -n "$X11_DISPLAY_NO" -s "-screen 0 $X11_DISPLAY_GEOMETRY" "bash"
+/usr/bin/xvfb-run -n "$X11_DISPLAY_NO" -s "-screen 0 $X11_DISPLAY_GEOMETRY" "/opt/xsession_start.sh"
